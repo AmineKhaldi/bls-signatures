@@ -41,9 +41,11 @@ set(SODIUM_DISABLE_TESTS "on" CACHE STRING "")
 set(SODIUM_CHIA_MINIMAL "on" CACHE STRING "")
 FetchContent_MakeAvailable(Sodium)
 
-if (DEFINED ENV{RELIC_MAIN})
+if(DEFINED ENV{RELIC_MAIN})
+  set(RELIC_GIT_REPO "https://github.com/relic-toolkit/relic.git")
   set(RELIC_GIT_TAG "origin/main")
 else ()
+  set(RELIC_GIT_REPO "https://github.com/AmineKhaldi/relic.git")
   # This is currently anchored to upstream b7b2266a0e4ee6f628f61d3ab638f524a18b52f1
   set(RELIC_GIT_TAG "d20d97c046da2c1689916569e9895b48a4693624")
 endif ()
@@ -52,7 +54,7 @@ message(STATUS "Relic will be built from: ${RELIC_GIT_TAG}")
 
 FetchContent_Declare(
   relic
-  GIT_REPOSITORY https://github.com/AmineKhaldi/relic.git
+  GIT_REPOSITORY ${RELIC_GIT_REPO}
   GIT_TAG ${RELIC_GIT_TAG}
 )
 
@@ -110,10 +112,18 @@ set(STBIN "OFF" CACHE STRING "")
 
 set(FP_METHD "INTEG;INTEG;INTEG;MONTY;LOWER;SLIDE" CACHE STRING "")
 
-if(MSVC)
-  set(COMP_FLAGS "" CACHE STRING "")
+if(DEFINED ENV{RELIC_MAIN})
+  if(MSVC)
+    set(CFLAGS "" CACHE STRING "")
+  else()
+    set(CFLAGS "-O3 -funroll-loops -fomit-frame-pointer" CACHE STRING "")
+  endif()
 else()
-  set(COMP_FLAGS "-O3 -funroll-loops -fomit-frame-pointer" CACHE STRING "")
+  if(MSVC)
+    set(COMP_FLAGS "" CACHE STRING "")
+  else()
+    set(COMP_FLAGS "-O3 -funroll-loops -fomit-frame-pointer" CACHE STRING "")
+  endif()
 endif()
 
 set(FP_PMERS "off" CACHE STRING "")
