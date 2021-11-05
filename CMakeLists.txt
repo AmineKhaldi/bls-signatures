@@ -58,7 +58,7 @@ FetchContent_Declare(
 
 # Relic related options
 
-set(STBIN TRUE)
+set(STBIN on CACHE STRING "")
 find_package(gmp)
 if (GMP_FOUND)
   message(STATUS "Found libgmp")
