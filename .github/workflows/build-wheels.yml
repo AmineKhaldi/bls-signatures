@@ -75,7 +75,7 @@ jobs:
           && echo "Building GMP"
           && cd gmp-6.2.1 && ./configure --enable-fat
           && make && make install && cd .. && rm -rf gmp-6.2.1
-        CIBW_BEFORE_BUID_LINUX: >
+        CIBW_BEFORE_BUILD_LINUX: >
           python -m pip install --upgrade pip
         CIBW_ENVIRONMENT_MACOS: "MACOSX_DEPLOYMENT_TARGET=10.14"
         # GH hosted MacOS runner has gmp natively
