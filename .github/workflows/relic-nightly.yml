@@ -69,6 +69,8 @@ jobs:
 
     - name: Install emsdk
       uses: mymindstorm/setup-emsdk@v11
+      with:
+        version: 3.1.36
 
     - name: Test javascript bindings
       run: |

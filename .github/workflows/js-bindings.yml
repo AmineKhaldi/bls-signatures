@@ -28,7 +28,9 @@ jobs:
           node-version: 16
 
       - name: Install emsdk
-        uses: mymindstorm/setup-emsdk@v11
+        uses: mymindstorm/setup-emsdk@v12
+        with:
+          version: 3.1.36
 
       - name: Get the version
         id: version_info
