@@ -8,3 +8,7 @@ FetchContent_MakeAvailable(pybind11 relic)
 
 pybind11_add_module(blspy ${CMAKE_CURRENT_SOURCE_DIR}/pythonbindings.cpp)
 target_link_libraries(blspy PRIVATE bls)
+if(WITH_COVERAGE)
+  target_compile_options(blspy PRIVATE --coverage)
+  target_link_options(blspy PRIVATE --coverage)
+endif()
