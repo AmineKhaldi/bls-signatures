@@ -3,7 +3,7 @@ name: build - check - upload
 on:
   push:
     branches:
-    - main
+    - '**'
     tags:
     - '**'
   pull_request:
@@ -145,7 +145,7 @@ jobs:
           python -m pip install --upgrade pip
         CIBW_ARCHS_MACOS: ${{ matrix.os.cibw-archs-macos[matrix.arch.matrix] }}
         CIBW_BEFORE_ALL_MACOS: >
-          brew install gmp boost cmake
+          brew install cmake
         CIBW_BEFORE_BUILD_MACOS: >
           python -m pip install --upgrade pip
         CIBW_ENVIRONMENT_MACOS: "MACOSX_DEPLOYMENT_TARGET=10.14"
